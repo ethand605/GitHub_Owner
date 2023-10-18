@@ -1,13 +1,8 @@
 ## Getting Started
 
-### Prerequisites
-
-- Python 3.x
-- Conda (optional)
-
 ### Running the Project
 
-1. Load the dependencies by running the following script:
+1. Load the dependencies by running the following commands:
 
    ```
    git clone git@github.com:golang/go.git
