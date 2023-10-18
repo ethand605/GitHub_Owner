@@ -24,9 +24,9 @@
    python3 main.py
    ```
 
-When asked "Please enter the subdirectory:", you can input `./.github` or `./api`. (It is recommended to `cd` into `./go` and run `ls` first to see what directories are available.)
+When asked to "Please enter the subdirectory:", you may enter subdirectory paths, eg. `./.github` or `./api`. (It is recommended to `cd` into `./go` and run `ls` first to see what directories are available.)
 
-It is also recommended to query subdirectories instead of root directory. There are definitely room for improvements for execution time/performance, but due to time constraint I will not be implementing them.
+It is also recommended to query subdirectories instead of root directory for shorter wait time. There are definitely room for improvements for execution time/performance, but due to time constraint I will not be implementing them.
 
 ## GitHub Owners: Expert Ranking System Summary
 
@@ -64,5 +64,5 @@ These metrics contribute to an overall "expert score" for each contributor, rank
 5. Different weights for different files, e.g., README.md is more important than .gitignore
 6. Support recursive query: querying a parent directory should also calculate and cache the experts for its subdirectories
    - https://imgur.com/rr7gWz4
-   - this would require reworking the current `git log` logic and exclude subdirectories, not implmemented due to time constraint
+   - this would require reworking the current `git log` logic to exclude subdirectories, not implmemented due to time constraint
    - will also need to take into considertaion of weights of subdirectories
