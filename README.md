@@ -59,8 +59,10 @@ These metrics contribute to an overall "expert score" for each contributor, rank
 2. Pull requests/issues support
 3. (Wild idea) If queried frequently, translate commit graph to a graph database, e.g., neo4j. No need for aggregation/parsing at code level
 4. Assuming this is a long-running server, implement re-pull and cache invalidation
+   - invalidate cache when new commits are pushed
+   - invalidating subdirectory cache also invalidates parent directory cache
 5. Different weights for different files, e.g., README.md is more important than .gitignore
 6. Support recursive query: querying a parent directory should also calculate and cache the experts for its subdirectories
-   - a. https://imgur.com/rr7gWz4
-   - b. this would require reworking the current `git log` logic and exclude subdirectories, not implmemented due to time constraint
-   - c. will also need to take into considertaion of weights of subdirectories
+   - https://imgur.com/rr7gWz4
+   - this would require reworking the current `git log` logic and exclude subdirectories, not implmemented due to time constraint
+   - will also need to take into considertaion of weights of subdirectories
