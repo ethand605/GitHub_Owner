@@ -9,8 +9,12 @@
 
 1. Load the dependencies by running the following script:
 
-   ```bash
-   ./load_dep.sh
+   ```
+   git clone git@github.com:golang/go.git
+   ```
+
+   ```
+   pip install -r requirements.txt
    ```
 
 2. Run the main Python script:
@@ -54,7 +58,7 @@ These metrics contribute to an overall "expert score" for each contributor, rank
 1. Break it down to smaller units - file/line level scoring
 2. Pull requests/issues support
 3. (Wild idea) If queried frequently, translate commit graph to a graph database, e.g., neo4j. No need for aggregation/parsing at code level
-4. Assuming this is a long-running server, implement re-pull and cache invalidation mechanism
+4. Assuming this is a long-running server, implement re-pull and cache invalidation
 5. Different weights for different files, e.g., README.md is more important than .gitignore
 6. Support recursive query: querying a parent directory should also calculate and cache the experts for its subdirectories
    - a. https://imgur.com/rr7gWz4

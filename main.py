@@ -27,8 +27,6 @@ def main():
                 print("No Authors found/Invalid input. Please enter a valid subdirectory.\n")
         except Exception as e:
             print(e)
-            # print out type of error
-            print(type(e))
             print("Invalid input. Please enter a valid subdirectory.")
 
 if __name__ == "__main__":
