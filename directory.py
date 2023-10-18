@@ -1,8 +1,8 @@
 from collections import defaultdict
 from git import Repo
 import os
-from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List
+from concurrent.futures import ProcessPoolExecutor
 
 
 COMMIT_PCT_SCORE_WEIGHT = .6
@@ -42,23 +42,11 @@ class Directory:
 
     def calculate_and_aggregate_expert_scores(self) -> None:
         """calls each scoring function and aggregates the scores"""
-        try:
-            with ThreadPoolExecutor() as executor:
-                futures = [executor.submit(func) for func in [self.calculate_file_pct_score, self.calculate_lines_pct_score, self.calculate_time_pct_score]]
-                scores = [future.result() for future in futures]
-
-            # this is a weird workaround for the gitpython lib not being thread safe
-            scores.append(self.calculate_commit_pct_score())
-        except Exception as _:
-            print("Multithreading failed, calculating scores sequentially")
-            # if multithreading fails, calculate scores sequentially
-            scores = [
-                self.calculate_commit_pct_score(),
-                self.calculate_file_pct_score(),
-                self.calculate_lines_pct_score(),
-                self.calculate_time_pct_score()
-            ]
-
+        # since most our the tasks are I/O bound, multithreading is preferred. 
+        # However, gitpython is not thread safe
+        with ProcessPoolExecutor(max_workers=4) as executor:
+            futures = [executor.submit(func) for func in [self.calculate_commit_pct_score, self.calculate_file_pct_score, self.calculate_lines_pct_score, self.calculate_time_pct_score]]
+            scores = [future.result() for future in futures]
         authors = set()
         for score in scores:
             authors.update(score.keys())

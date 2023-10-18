@@ -26,6 +26,20 @@ When asked "Please enter the subdirectory:", you can input `./.github` or `./api
 
 It is also recommended to query subdirectories instead of root directory. There are definitely room for improvements for execution time/performance, but due to time constraint I will not be implementing them.
 
+## GitHub Owners: Expert Ranking System Summary
+
+Our ranking system identifies the "owners" of a GitHub directory based on four key metrics:
+
+- **Commit Contribution (%):** Measures the percentage of commits in a directory made by a contributor (`git log`).
+
+- **File Touch (%):** Measures the percentage of files in a directory modified by a contributor (`git log`).
+
+- **Line Touch (%):** Estimates the percentage of lines in a directory modified by a contributor (`git blame`).
+
+- **Time Commitment (%):** Evaluates the time a contributor has spent committing relative to the repository's age (`git log`).
+
+These metrics contribute to an overall "expert score" for each contributor, ranking them based on their engagement with the directory.
+
 ## TODOs
 
 - Unify the commit traversal logic
@@ -34,7 +48,8 @@ It is also recommended to query subdirectories instead of root directory. There 
   - Progress bar for overall progress
   - Progress bar for each scoring function
 - Multithreading for each subdirectory
-  - Each subdirectory is independent of each other
+  - Each subdirectory is independent of each other and can be processed in parallel
+  - most of the tasks are I/O bound
 
 ## Ideas for Future Work
 
